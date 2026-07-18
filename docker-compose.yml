@@ -1,0 +1,69 @@
+services:
+  # ── Laravel App (Nginx + PHP-FPM) ──
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: absensi-app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      - APP_NAME=Absensi Karyawan
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_URL=http://103.253.245.152
+      - APP_KEY=${APP_KEY}
+      - APP_LOCALE=id
+      - APP_FALLBACK_LOCALE=en
+      - APP_FAKER_LOCALE=id_ID
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=absensi_web
+      - DB_USERNAME=absensi
+      - DB_PASSWORD=absensi_secret_2026
+      - SESSION_DRIVER=file
+      - SESSION_LIFETIME=120
+      - CACHE_STORE=file
+      - QUEUE_CONNECTION=sync
+      - LOG_CHANNEL=stack
+      - LOG_LEVEL=error
+    volumes:
+      - app-storage:/var/www/html/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - absensi-net
+
+  # ── MySQL Database ──
+  db:
+    image: mysql:8.0
+    container_name: absensi-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_secret_2026
+      MYSQL_DATABASE: absensi_web
+      MYSQL_USER: absensi
+      MYSQL_PASSWORD: absensi_secret_2026
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_secret_2026"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - absensi-net
+
+volumes:
+  db-data:
+  app-storage:
+
+networks:
+  absensi-net:
+    driver: bridge

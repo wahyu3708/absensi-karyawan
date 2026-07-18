@@ -1,0 +1,103 @@
+/* ── Google Font Import ──────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+
+/* ── Custom Scrollbar ────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Selection Color ─────────────────────────────────── */
+::selection {
+    background-color: rgba(99, 102, 241, 0.3);
+    color: white;
+}
+
+/* ── Smooth Focus Styles ─────────────────────────────── */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+}
+
+/* ── Table Responsive ────────────────────────────────── */
+.overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ── Glass Morphism Utility ──────────────────────────── */
+.glass {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── Pagination Styles ───────────────────────────────── */
+nav[role="navigation"] {
+    display: flex;
+    justify-content: center;
+}
+
+nav[role="navigation"] span,
+nav[role="navigation"] a {
+    padding: 0.375rem 0.75rem;
+    margin: 0 0.125rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    color: #9ca3af;
+    transition: all 0.2s;
+}
+
+nav[role="navigation"] a:hover {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+}
+
+nav[role="navigation"] span[aria-current="page"] span {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+/* ── Pulse Animation for Status Dots ─────────────────── */
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px rgba(99, 102, 241, 0);
+    }
+}
+
+.pulse-glow {
+    animation: pulse-glow 2s infinite;
+}
