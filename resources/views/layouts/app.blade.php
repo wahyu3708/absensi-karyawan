@@ -335,6 +335,49 @@
     </script>
 
     @stack('scripts')
+
+    {{-- DEBUG: Cari semua deklarasi csrfToken di halaman ini --}}
+    <script>
+        (function() {
+            console.group('🔍 DEBUG: Scanning for csrfToken declarations');
+
+            // Ambil semua <script> tags di halaman
+            const scripts = document.querySelectorAll('script');
+            scripts.forEach((script, index) => {
+                const src = script.src || '(inline)';
+                const content = script.textContent || '';
+
+                // Cari deklarasi csrfToken di inline scripts
+                if (content.includes('csrfToken')) {
+                    const lines = content.split('\n');
+                    lines.forEach((line, lineIdx) => {
+                        if (line.includes('csrfToken')) {
+                            console.warn(
+                                `⚠️ Script #${index} [${src}] - Line ${lineIdx + 1}: ${line.trim()}`
+                            );
+                        }
+                    });
+                }
+
+                // Cek juga external scripts
+                if (script.src && script.src.includes('app')) {
+                    console.info(`📦 External script: ${script.src} (type: ${script.type || 'classic'})`);
+                }
+            });
+
+            // Cek apakah window.csrfToken sudah ada
+            console.info(`✅ window.csrfToken = ${window.csrfToken ? 'EXISTS' : 'UNDEFINED'}`);
+
+            // Coba cari di full page source via line numbers
+            // Error bilang "scan:527" — ini adalah line di rendered HTML
+            console.info('💡 Untuk melihat source rendered HTML:');
+            console.info('   Klik kanan halaman → View Page Source');
+            console.info('   Lalu cari "csrfToken" (Ctrl+F)');
+            console.info('   Atau langsung ke line 527');
+
+            console.groupEnd();
+        })();
+    </script>
 </body>
 
 </html>
