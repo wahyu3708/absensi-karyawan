@@ -11,5 +11,3 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// ── CSRF Token Setup for Fetch ────────────────────────
-window.csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
