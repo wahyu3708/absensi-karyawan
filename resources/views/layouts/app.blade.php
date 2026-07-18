@@ -150,7 +150,7 @@
         }, 5000);
 
         // ── Notification System ───────────────────────────
-        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+        // csrfToken is already set as window.csrfToken in app.js
         let notifPanelOpen = false;
         let lastUnreadCount = 0;
 
