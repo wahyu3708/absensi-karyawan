@@ -1,4 +1,4 @@
-const CACHE_NAME = 'absensi-v1';
+const CACHE_NAME = 'absensi-v2';
 const STATIC_ASSETS = [
     '/login',
     '/manifest.json',
