@@ -225,7 +225,7 @@
                 await fetch(`/api/notifications/${id}/read`, {
                     method: 'POST',
                     headers: {
-                        'X-CSRF-TOKEN': csrfToken,
+                        'X-CSRF-TOKEN': window.csrfToken,
                         'Accept': 'application/json',
                     }
                 });
@@ -244,7 +244,7 @@
                 await fetch('/api/notifications/read-all', {
                     method: 'POST',
                     headers: {
-                        'X-CSRF-TOKEN': csrfToken,
+                        'X-CSRF-TOKEN': window.csrfToken,
                         'Accept': 'application/json',
                     }
                 });

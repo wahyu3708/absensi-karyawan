@@ -172,7 +172,6 @@
 @push('scripts')
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     <script>
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
         let currentLat = null;
         let currentLng = null;
         let scanner = null;
@@ -588,7 +587,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken,
+                        'X-CSRF-TOKEN': window.csrfToken,
                         'Accept': 'application/json',
                     },
                     body: JSON.stringify({
@@ -634,7 +633,7 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken,
+                        'X-CSRF-TOKEN': window.csrfToken,
                         'Accept': 'application/json',
                     },
                     body: JSON.stringify({
