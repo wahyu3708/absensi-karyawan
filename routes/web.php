@@ -13,6 +13,11 @@ use App\Http\Controllers\ReportExportController;
 use Illuminate\Support\Facades\Route;
 
 // ── Public Routes ──────────────────────────────────────
+Route::get('/clear-cache', function() {
+    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    return 'Cache cleared successfully!';
+});
+
 Route::get('/', fn() => redirect('/login'));
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
